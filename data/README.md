@@ -1,6 +1,6 @@
 # Data Directory
 
-The paper uses an RTB attribution dataset that cannot be redistributed through
+The paper uses an RTB attribution dataset (Criteo dataset) that cannot be redistributed through
 this repository.
 
 Because the authors are not the data owner, this repository does not
