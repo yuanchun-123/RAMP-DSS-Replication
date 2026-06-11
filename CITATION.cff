@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: RAMP DSS Replication Package
+message: Please cite the manuscript associated with this replication package.
+authors:
+  - family-names: Ye
+    given-names: Yuanchun
+  - family-names: Xue
+    given-names: Pei
+preferred-citation:
+  type: article
+  title: "RAMP: A Reliability-Aware Decision Support System for Campaign Prioritization under Biased Attribution Signals"
+  authors:
+    - family-names: Xue
+      given-names: Pei
+    - family-names: Ye
+      given-names: Yuanchun
+  journal: Decision Support Systems
+  year: 2026
+  notes: Manuscript submitted
+

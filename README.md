@@ -1,138 +1,183 @@
-# RAMP-DSS Replication Package
+# RAMP DSS Replication Package
 
-This repository contains replication code and documentation for the manuscript:
+## Paper
+
 **RAMP: A Reliability-Aware Decision Support System for Campaign Prioritization under Biased Attribution Signals**
 
-The manuscript develops and evaluates RAMP, a diagnostic decision-support artifact for assessing attribution reliability in real-time bidding advertising. The code implements the main components of the RAMP workflow: selection-adjusted benchmarking, falsification-based diagnostics, campaign-level aggregation, diagnostic gating, and time-split managerial decision simulation.
+Authors:
 
-## Authors
+Pei Xue  
+Tepper School of Business  
+Carnegie Mellon University
 
-See the submitted manuscript for the author list and affiliations.
+Yuanchun Ye (Corresponding Author)  
+Tepper School of Business  
+Carnegie Mellon University  
+Email: [yuanchuy@andrew.cmu.edu](mailto:yuanchuy@andrew.cmu.edu)
 
-## Repository Purpose
+---
 
-This package is intended for reviewers and researchers who want to inspect or reproduce the empirical workflow. It explains the required data, how to obtain the original dataset, how to run the notebook and scripts, and how generated files map to manuscript tables and figures.
+## Overview
 
-## Data Availability
+This repository contains the replication materials for a Decision Support
+Systems manuscript on campaign prioritization in real-time bidding advertising.
+The paper studies a setting in which managers must decide which campaigns to
+prioritize when observed attribution signals may be biased by selection,
+exposure patterns, and user activity.
 
-This study uses the public Criteo Attribution Dataset. The authors are not the owners of the original data and do not redistribute the raw dataset in this repository. To reproduce the analysis, users should download the original Criteo data from the data provider and place the files under `data/raw/`.
+RAMP, short for Reliability-Aware Attribution Management and Prioritization, is
+a diagnostic decision-support workflow. It does not treat observed attribution
+as a direct measure of campaign value. Instead, it builds a selection-adjusted
+benchmark, runs reliability diagnostics, aggregates diagnostic signals at the
+campaign level, applies screening gates, and evaluates prioritization decisions
+in a time-split setting.
 
-The repository provides code, documentation, and output-generation scripts. Processed data and paper outputs can be regenerated locally once the raw data are placed in the expected directory.
+The repository includes:
 
-The license applies to the code in this repository only. The original Criteo data are governed by the data provider's terms of use.
+- a cleaned replication notebook;
+- Python modules for the main RAMP workflow components;
+- scripts for reproducing manuscript outputs;
+- documentation for data access and reproduction;
+- output mappings for manuscript tables and figures;
+- aggregate figure files used for reviewer orientation.
+
+The repository does not include the underlying proprietary RTB data.
 
 ## Repository Structure
 
 ```text
 RAMP-DSS-Replication/
-  README.md
-  LICENSE
-  requirements.txt
-  .gitignore
-  notebooks/
-    RAMP_replication_notebook.ipynb
-  src/
-    00_config.py
-    01_data_preparation.py
-    02_descriptive_statistics.py
-    03_selection_adjusted_benchmark.py
-    04_diagnostic_tests.py
-    05_campaign_aggregation.py
-    06_decision_gate.py
-    07_time_split_evaluation.py
-    utils.py
-  scripts/
-    run_full_pipeline.py
-    reproduce_paper_outputs.py
-  outputs/
-    tables/
-    figures/
-  docs/
-    DATA_ACCESS.md
-    REPRODUCTION_GUIDE.md
-    OUTPUT_MAPPING.md
-  data/
-    README.md
+├── README.md
+├── CITATION.cff
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+├── data/
+│   └── README.md
+├── docs/
+│   ├── DATA_ACCESS.md
+│   ├── OUTPUT_MAPPING.md
+│   ├── PUBLIC_RELEASE_CHECKLIST.md
+│   ├── RELEASE_NOTES_v1.0.md
+│   ├── REPRODUCTION_GUIDE.md
+│   └── REVIEWER_GUIDE.md
+├── notebooks/
+│   └── RAMP_replication_notebook.ipynb
+├── outputs/
+│   ├── figures/
+│   └── tables/
+├── scripts/
+│   ├── reproduce_paper_outputs.py
+│   └── run_full_pipeline.py
+└── src/
+    ├── 00_config.py
+    ├── 01_data_preparation.py
+    ├── 02_descriptive_statistics.py
+    ├── 03_selection_adjusted_benchmark.py
+    ├── 04_diagnostic_tests.py
+    ├── 05_campaign_aggregation.py
+    ├── 06_decision_gate.py
+    ├── 07_time_split_evaluation.py
+    └── utils.py
 ```
+
+Folder purposes:
+
+- `data/`: documents the expected local data layout. Raw and processed data are
+  not tracked.
+- `docs/`: contains data-access, reproduction, reviewer, output-mapping, and
+  release documentation.
+- `notebooks/`: contains the cleaned replication notebook.
+- `scripts/`: contains command-line entry points for reproducing outputs.
+- `src/`: contains reusable workflow components used by the scripts and
+  notebook.
+- `outputs/figures/`: contains aggregate figure files for reviewer orientation.
+- `outputs/tables/`: receives generated tables when the pipeline is run locally.
 
 ## Installation
 
 ```bash
-git clone https://github.com/<username>/RAMP-DSS-Replication.git
+git clone https://github.com/yuanchun-123/RAMP-DSS-Replication.git
 cd RAMP-DSS-Replication
-python -m venv .venv
-source .venv/bin/activate
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Reproduction Steps
-
-1. Download the Criteo Attribution Dataset from the original provider.
-2. Place the raw TSV file at `data/raw/pcb_dataset_final.tsv`, or set `RAMP_DATA_PATH` to the file path.
-3. Run:
+On Windows, activate the environment with:
 
 ```bash
-python scripts/reproduce_paper_outputs.py
+venv\Scripts\activate
 ```
 
-The same command is available through:
+## Reproducing Results
+
+1. Obtain authorized access to the underlying RTB attribution data.
+2. Place the raw input file under:
+
+```text
+data/raw/pcb_dataset_final.tsv
+```
+
+Alternatively, set `RAMP_DATA_PATH` to the local file path:
+
+```bash
+export RAMP_DATA_PATH=/absolute/path/to/input_file.tsv
+```
+
+3. Run the full replication workflow:
 
 ```bash
 python scripts/run_full_pipeline.py
 ```
 
-## Colab Option
+or:
 
-The notebook can also be run in Colab. Install the packages in
-`requirements.txt`, place the raw data where Colab can read it, and set
-`RAMP_DATA_PATH` if the file is not under `data/raw/`. Google Drive mounting is
-optional rather than part of the main workflow.
-
-## Expected Outputs
-
-Generated tables are written to:
-
-```text
-outputs/tables/
+```bash
+python scripts/reproduce_paper_outputs.py
 ```
 
-Generated figures are written to:
+Generated tables are written to `outputs/tables/`. Generated figures are written
+to `outputs/figures/`. Processed intermediate files are written under
+`data/processed/` and are not tracked by Git.
 
-```text
-outputs/figures/
-```
+Runtime depends on hardware and local I/O speed. The full dataset is large; a
+machine with at least 16 GB RAM is recommended, and 32 GB or more is preferable
+for full-data runs. A complete run may take several hours on a standard laptop.
 
-The table CSV files are ignored by default because they are derived from the raw
-Criteo data. The mapping from outputs to manuscript elements is listed in
-`docs/OUTPUT_MAPPING.md`.
+## Data Availability
 
-## Manuscript Tables and Figures
+The original RTB dataset used in this study is proprietary and cannot be
+redistributed.
 
-Key output groups include:
+The repository contains all code required to reproduce the analyses, figures,
+and tables once authorized access to the underlying data is obtained. Raw data,
+processed data, user-level records, and impression-level records are excluded
+from version control.
 
-- selection-adjusted benchmark and overlap diagnostics;
-- campaign reprioritization metrics;
-- diagnostic gate funnel tables and figures;
-- decision-risk classification outputs;
-- time-split managerial decision simulation outputs.
+The license in this repository applies only to the code and documentation. It
+does not apply to the underlying data.
 
-See `docs/OUTPUT_MAPPING.md` for file-level mapping.
+## Output Mapping
 
-## Computational Notes
-
-The full Criteo dataset is large. Runtime and memory use depend on hardware,
-disk speed, and whether processed checkpoints already exist. See
-`docs/REPRODUCTION_GUIDE.md` for environment notes and troubleshooting.
-
-W&B tracking is disabled by default.
+The mapping from generated files to manuscript tables and figures is provided in
+[docs/OUTPUT_MAPPING.md](docs/OUTPUT_MAPPING.md).
 
 ## Citation
 
-If using this code, cite the manuscript listed above and the original Criteo
-Attribution Dataset according to the provider's citation guidance.
+If you use this replication package, cite the manuscript and this repository.
+
+```bibtex
+@article{xueye_ramp_dss,
+  title   = {RAMP: A Reliability-Aware Decision Support System for Campaign Prioritization under Biased Attribution Signals},
+  author  = {Xue, Pei and Ye, Yuanchun},
+  journal = {Decision Support Systems},
+  note    = {Manuscript submitted},
+  year    = {2026}
+}
+```
 
 ## Contact
 
-For replication questions, contact the corresponding author listed in the
-submitted manuscript.
-
+For replication questions, contact Yuanchun Ye at
+[yuanchuy@andrew.cmu.edu](mailto:yuanchuy@andrew.cmu.edu).

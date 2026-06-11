@@ -2,14 +2,15 @@
 
 ## Dataset
 
-This study uses the Criteo Attribution Dataset, originally released by Criteo
-for attribution and advertising research.
+This study uses an RTB attribution dataset for advertising research. The
+underlying data are proprietary and are not included in this repository.
 
 ## Why the Raw Data Are Not Included
 
 The authors are not the owners of the original dataset. The replication package
-therefore does not redistribute the raw Criteo files. Users should obtain the
-dataset from the original provider and follow the provider's terms of use.
+therefore does not redistribute raw data, processed data, user-level records, or
+impression-level records. Users need authorized access to the underlying data
+and must follow the data provider's terms of use.
 
 ## Expected Local Directory
 
@@ -33,7 +34,8 @@ export RAMP_DATA_PATH=/absolute/path/to/your/criteo_file.tsv
 
 ## Expected Input Columns
 
-The replication code expects the standard Criteo attribution fields, including:
+The replication code expects the attribution fields used in the study,
+including:
 
 ```text
 timestamp
@@ -58,5 +60,5 @@ The scripts treat `-1` values as missing where the Criteo fields use that
 sentinel. Timestamp fields are normalized to seconds before constructing
 forward and placebo diagnostic windows.
 
-The data are used for academic replication only.
-
+The data are used for academic replication only and must not be redistributed
+through this repository.

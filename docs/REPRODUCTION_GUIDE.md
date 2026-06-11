@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ## Data Placement
 
-Download the Criteo Attribution Dataset from the original provider and place the
+Obtain authorized access to the underlying RTB attribution data and place the
 raw TSV file under:
 
 ```text
@@ -79,8 +79,8 @@ if the raw data are outside the repository layout.
 
 `FileNotFoundError: Raw Criteo data were not found`
 
-Check that the raw TSV is in `data/raw/` or that `RAMP_DATA_PATH` points to the
-correct file.
+Check that the authorized raw TSV is in `data/raw/` or that `RAMP_DATA_PATH`
+points to the correct file.
 
 `No module named lightgbm`
 
@@ -95,4 +95,3 @@ No outputs appear under `outputs/tables/`
 
 Confirm that the notebook completed. Partial runs may leave checkpoints under
 `data/processed/` but no final paper tables.
-

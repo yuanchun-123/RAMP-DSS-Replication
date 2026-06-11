@@ -1,12 +1,13 @@
 # Data Directory
 
-The paper uses the public Criteo Attribution Dataset.
+The paper uses an RTB attribution dataset that cannot be redistributed through
+this repository.
 
-The original Criteo Attribution Dataset is publicly available from the data
-provider. Because the authors are not the data owner, this repository does not
-redistribute the raw data. To reproduce the analysis, download the data from
-the original provider and place it in `data/raw/` following the directory
-structure described below.
+Because the authors are not the data owner, this repository does not
+redistribute raw data, processed data, user-level records, or impression-level
+records. To reproduce the analysis, obtain authorized access to the underlying
+data and place it in `data/raw/` following the directory structure described
+below.
 
 Expected local structure:
 
@@ -23,6 +24,5 @@ has another name, either rename it to `pcb_dataset_final.tsv` or set
 `RAMP_DATA_PATH` to the full path before running the scripts.
 
 Processed files are generated under `data/processed/`. They are excluded from
-version control because they can be large and are derived from the raw Criteo
-data.
-
+version control because they can be large and are derived from the underlying
+RTB data.
